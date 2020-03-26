@@ -1,0 +1,63 @@
+management:
+  security:
+    enabled: false
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
+        base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+      
+server:
+  port: 2030
+  connection-timeout: 1600s
+  compression:
+    enabled: true
+    mime-types: 'text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json'
+    min-response-size: 512
+    
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    
+  application:
+    name: unicorn
+    
+  profiles:
+    active:
+      dev
+
+  cloud: 
+    inetutils:
+      preferred-networks: 10.0
+    discovery:
+      service-id: unicorn
+      enabled: true
+
+jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 60000
+    prefer-ip-address: true
+    leaseExpirationDurationInSeconds: 60000
+  client:
+    enabled: true
+    registryFetchIntervalSeconds: 600
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka
+

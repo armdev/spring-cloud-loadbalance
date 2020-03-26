@@ -1,0 +1,52 @@
+management:
+  security:
+   enabled: false
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+       include: '*'
+    web:
+     exposure:
+      include: '*'
+      base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+
+
+server:
+    port: 8761
+    connection-timeout: 1600s
+
+      
+spring:
+  application:
+    name: eureka    
+  cloud:
+   inetutils:
+     preferred-networks: 10.0
+
+
+eureka:
+  instance:
+    hostname: eureka
+    leaseRenewalIntervalInSeconds: 5
+    prefer-ip-address: true
+    leaseExpirationDurationInSeconds: 5  
+  server:
+    eviction-interval-timer-in-ms: 90000 #default 60000
+    response-cache-update-interval-ms: 30000 #default 30000
+    a-sgcache-expiry-timeout-ms: 30000
+    peer-eureka-nodes-update-interval-ms: 15000
+    renewal-threshold-update-interval-ms: 30000
+    use-read-only-response-cache: false
+    enableSelfPreservation: true
+    waitTimeInMsWhenSyncEmpty: 0
+    peer-node-read-timeout-ms: 10000   
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    healthcheck.enabled: true    

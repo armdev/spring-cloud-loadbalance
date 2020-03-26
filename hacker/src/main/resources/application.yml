@@ -1,0 +1,69 @@
+management:
+  security:
+    enabled: false
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+    web:
+      exposure:
+        include: '*'
+        base-path: /actuator
+    cors:
+      allowed-origins: 'true'
+      enabled-by-default: 'false'
+      
+server:
+  port: 2020
+  connection-timeout: 6600s
+
+  compression:
+    enabled: true
+    mime-types: 'text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json'
+    min-response-size: 512
+    
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    
+  application:
+    name: hacker
+    
+  profiles:
+    active:
+      dev
+
+  cloud:       
+    loadbalancer:
+      ribbon: 
+        enabled: false
+    inetutils:
+      preferred-networks: 10.0
+    discovery:
+      service-id: hacker
+      enabled: true
+
+  
+    
+jackson:
+    serialization:
+      write_dates_as_timestamps: false
+      
+
+    
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    prefer-ip-address: true
+    leaseExpirationDurationInSeconds: 3
+  client:
+    enabled: true
+    registryFetchIntervalSeconds: 5
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka
