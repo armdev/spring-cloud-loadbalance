@@ -21,15 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class HackerController {
 
     @Autowired
-    private HackerServiceDockerStackServices hackerServiceDockerStackServices;
-
-    @Autowired
-    private HackerServiceSimpleDockerCompose hackerServiceSimpleDockerCompose;
+    private HackerService hackerServiceSimpleDockerCompose;
 
     @GetMapping("/attack")
     public String stack() {
         //working withour eureka!!!
-        return hackerServiceDockerStackServices.runWithDockerCompose();
+        return hackerServiceSimpleDockerCompose.runWithDockerCompose();
     }
 
     @GetMapping("/attack/fails")

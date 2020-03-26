@@ -13,11 +13,22 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Component
 @Slf4j
-public class HackerServiceDockerStackServices {
+public class HackerService {
+
+    @Autowired
+    private EurekaService eurekaService;
 
     @Autowired
     private RestTemplate restTemplate;
 
+    public String didNotWorkWithEureka() {
+        String api = eurekaService.findUnicorn();
+        log.info("REQUEST TO API: " + api);
+        String results = restTemplate.getForObject(api + "data", String.class);
+        return results;
+    }
+    
+    
     public String runWithDockerCompose() {
         //String api = eurekaService.findUnicorn();
         //log.info("REQUEST TO API: " + api);
